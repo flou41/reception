@@ -8,6 +8,7 @@ radio.onReceivedValue(function (name, value) {
     y = value
 })
 let t = 0
+let cote = 0
 let joueur = 0
 let deplacement = 0
 let y = 0
@@ -15,7 +16,7 @@ let bouton = ""
 let x = 0
 radio.setGroup(2)
 basic.forever(function () {
-    if (deplacement == 1) {
+    if (deplacement == 0) {
         if (x == 0 && y < 0) {
             maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CCW, Math.abs(y))
             maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, Math.abs(y))
@@ -39,8 +40,10 @@ basic.forever(function () {
         } else if (x == 0 && y == 0) {
             maqueen.motorStop(maqueen.Motors.M1)
         }
-    } else {
-        maqueen.motorStop(maqueen.Motors.M1)
+        maqueen.writeLED(maqueen.LED.LEDLeft, maqueen.LEDswitch.turnOff)
+        maqueen.writeLED(maqueen.LED.LEDLeft, maqueen.LEDswitch.turnOff)
+    } else if (deplacement == 1) {
+        maqueen.motorStop(maqueen.Motors.All)
     }
 })
 basic.forever(function () {
@@ -51,19 +54,32 @@ basic.forever(function () {
             deplacement = 0
         }
     } else if (bouton == "B") {
-        if (joueur == 0) {
-            joueur = 1
-        } else {
-            joueur = 0
+        if (deplacement == 0) {
+            if (joueur == 0) {
+                joueur = 1
+            } else {
+                joueur = 0
+            }
+        } else if (deplacement == 1) {
+            if (cote == 0) {
+                cote = 1
+                maqueen.writeLED(maqueen.LED.LEDLeft, maqueen.LEDswitch.turnOff)
+                maqueen.writeLED(maqueen.LED.LEDRight, maqueen.LEDswitch.turnOn)
+            } else if (cote == 1) {
+                cote = 0
+                maqueen.writeLED(maqueen.LED.LEDLeft, maqueen.LEDswitch.turnOn)
+                maqueen.writeLED(maqueen.LED.LEDRight, maqueen.LEDswitch.turnOff)
+            }
         }
     } else if (bouton == "AB") {
         t = 1
         basic.pause(500)
         t = 0
     }
+    basic.pause(200)
 })
 basic.forever(function () {
-    if (deplacement == 0) {
+    if (deplacement == 1) {
         if (x > 0 && x < 51) {
         	
         } else if (x >= 51 && x < 102) {
@@ -76,4 +92,5 @@ basic.forever(function () {
         	
         }
     }
+    basic.showString("" + (deplacement))
 })
