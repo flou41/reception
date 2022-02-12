@@ -29,6 +29,6 @@ basic.forever(function () {
     } else if (x > 0 && y == 0) {
         maqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CW, x)
     } else if (x == 0 && y == 0) {
-        maqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CW, 0)
+        maqueen.motorStop(maqueen.Motors.M1)
     }
 })
