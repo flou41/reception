@@ -102,12 +102,16 @@ basic.forever(function () {
     if (deplacement == 1) {
         if (cote == 0) {
             if (x > 0) {
-                maqueen.servoRun(maqueen.Servos.S1, Math.constrain(x, 0, 90))
+                maqueen.servoRun(maqueen.Servos.S1, x + 90)
             }
         } else if (cote == 1) {
             if (x > 0) {
-                maqueen.servoRun(maqueen.Servos.S1, 0 - x)
+                maqueen.servoRun(maqueen.Servos.S1, 90 - x)
             }
+        }
+        if (t == 1) {
+            basic.pause(500)
+            maqueen.servoRun(maqueen.Servos.S1, 90)
         }
     }
 })
