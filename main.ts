@@ -101,31 +101,13 @@ basic.forever(function () {
 basic.forever(function () {
     if (deplacement == 1) {
         if (cote == 0) {
-            if (x > 0 && x < 51) {
-                basic.showNumber(1)
-                if (t == 1) {
-                    maqueen.servoRun(maqueen.Servos.S1, 85)
-                    basic.pause(500)
-                    maqueen.servoRun(maqueen.Servos.S1, 95)
-                    basic.pause(500)
-                    maqueen.servoRun(maqueen.Servos.S1, 90)
-                }
-            } else if (x >= 51 && x < 102) {
-                basic.showNumber(2)
-                maqueen.servoRun(maqueen.Servos.S1, 80)
-                basic.pause(500)
-            } else if (x >= 102 && x < 153) {
-                basic.showNumber(3)
-                maqueen.servoRun(maqueen.Servos.S1, 75)
-            } else if (x >= 153 && x < 204) {
-                basic.showNumber(4)
-                maqueen.servoRun(maqueen.Servos.S1, 70)
-            } else if (x >= 204 && x < 255) {
-                basic.showNumber(5)
-                maqueen.servoRun(maqueen.Servos.S1, 65)
+            if (x > 0) {
+                maqueen.servoRun(maqueen.Servos.S1, Math.constrain(x, 0, 90))
             }
         } else if (cote == 1) {
-        	
+            if (x > 0) {
+                maqueen.servoRun(maqueen.Servos.S1, 0 - x)
+            }
         }
     }
 })
