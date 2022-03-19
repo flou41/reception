@@ -7,14 +7,14 @@ radio.onReceivedString(function (receivedString) {
 radio.onReceivedValue(function (name, value) {
     y = value
 })
-let cote = 0
-let t = 0
-let joueur = 0
-let deplacement = 0
 let y = 0
 let bouton = ""
 let x = 0
 radio.setGroup(2)
+let cote = 0
+let deplacement = 1
+let joueur = 0
+let t = 0
 basic.forever(function () {
     if (deplacement == 1) {
         pins.analogWritePin(AnalogPin.P0, 1023)
@@ -64,6 +64,13 @@ basic.forever(function () {
         }
     } else if (deplacement == 1) {
         maqueen.motorStop(maqueen.Motors.All)
+        if (cote == 0) {
+            maqueen.writeLED(maqueen.LED.LEDLeft, maqueen.LEDswitch.turnOff)
+            maqueen.writeLED(maqueen.LED.LEDRight, maqueen.LEDswitch.turnOn)
+        } else if (cote == 1) {
+            maqueen.writeLED(maqueen.LED.LEDLeft, maqueen.LEDswitch.turnOn)
+            maqueen.writeLED(maqueen.LED.LEDRight, maqueen.LEDswitch.turnOff)
+        }
     }
 })
 basic.forever(function () {
@@ -83,12 +90,8 @@ basic.forever(function () {
         } else if (deplacement == 1) {
             if (cote == 0) {
                 cote = 1
-                maqueen.writeLED(maqueen.LED.LEDLeft, maqueen.LEDswitch.turnOff)
-                maqueen.writeLED(maqueen.LED.LEDRight, maqueen.LEDswitch.turnOn)
             } else if (cote == 1) {
                 cote = 0
-                maqueen.writeLED(maqueen.LED.LEDLeft, maqueen.LEDswitch.turnOn)
-                maqueen.writeLED(maqueen.LED.LEDRight, maqueen.LEDswitch.turnOff)
             }
         }
     } else if (bouton == "AB") {
@@ -102,16 +105,17 @@ basic.forever(function () {
     if (deplacement == 1) {
         if (cote == 0) {
             if (x > 0) {
-                maqueen.servoRun(maqueen.Servos.S1, x + 90)
+                maqueen.servoRun(maqueen.Servos.S1, Math.constrain(x + 90, 90, 180))
             }
         } else if (cote == 1) {
             if (x > 0) {
-                maqueen.servoRun(maqueen.Servos.S1, 90 - x)
+                maqueen.servoRun(maqueen.Servos.S1, Math.constrain(90 - x, 0, 90))
             }
         }
         if (t == 1) {
             basic.pause(500)
             maqueen.servoRun(maqueen.Servos.S1, 90)
+            basic.pause(5000)
         }
     }
 })
