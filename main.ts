@@ -36,7 +36,7 @@ basic.forever(function () {
 })
 basic.forever(function () {
     if (deplacement == 0) {
-        maqueen.servoRun(maqueen.Servos.S1, 90)
+        maqueen.servoRun(maqueen.Servos.S2, 90)
         maqueen.writeLED(maqueen.LED.LEDLeft, maqueen.LEDswitch.turnOff)
         maqueen.writeLED(maqueen.LED.LEDRight, maqueen.LEDswitch.turnOff)
         if (x == 0 && y < 0) {
@@ -105,16 +105,16 @@ basic.forever(function () {
     if (deplacement == 1) {
         if (cote == 0) {
             if (x > 0) {
-                maqueen.servoRun(maqueen.Servos.S1, Math.constrain(x + 90, 90, 180))
+                maqueen.servoRun(maqueen.Servos.S2, Math.constrain(x + 90, 90, 180))
             }
         } else if (cote == 1) {
             if (x > 0) {
-                maqueen.servoRun(maqueen.Servos.S1, Math.constrain(90 - x, 0, 90))
+                maqueen.servoRun(maqueen.Servos.S2, Math.constrain(90 - x, 0, 90))
             }
         }
         if (t == 1) {
             basic.pause(500)
-            maqueen.servoRun(maqueen.Servos.S1, 90)
+            maqueen.servoRun(maqueen.Servos.S2, 90)
             basic.pause(5000)
         }
     }
