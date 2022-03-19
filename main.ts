@@ -40,11 +40,11 @@ basic.forever(function () {
         maqueen.writeLED(maqueen.LED.LEDLeft, maqueen.LEDswitch.turnOff)
         maqueen.writeLED(maqueen.LED.LEDRight, maqueen.LEDswitch.turnOff)
         if (x == 0 && y < 0) {
-            maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CCW, Math.abs(y))
-            maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, Math.abs(y))
+            maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CCW, Math.abs(y) - 10)
+            maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, Math.abs(y) - 10)
         } else if (x == 0 && y > 0) {
-            maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, y)
-            maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CCW, y)
+            maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, y - 10)
+            maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CCW, y - 10)
         } else if (x < 0 && y == 0) {
             maqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CW, Math.abs(x))
         } else if (x > 0 && y == 0) {
