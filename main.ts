@@ -50,17 +50,13 @@ basic.forever(function () {
         } else if (x > 0 && y == 0) {
             maqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CCW, x)
         } else if (x < 0 && y < 0) {
-            maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, Math.abs(x))
-            maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, x - Math.abs(y))
-        } else if (x < 0 && y > 0) {
+            maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, Math.abs(x) - Math.abs(y))
             maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, Math.abs(x))
-            maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, x - Math.abs(y))
-        } else if (x > 0 && y == 0) {
-            maqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CCW, x)
-        } else if (x > 0 && y == 0) {
-            maqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CW, x)
+        } else if (x < 0 && y > 0) {
+            maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, Math.abs(x) - Math.abs(y))
+            maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, Math.abs(x))
         } else if (x == 0 && y == 0) {
-            maqueen.motorStop(maqueen.Motors.M1)
+            maqueen.motorStop(maqueen.Motors.All)
         }
     } else if (deplacement == 1) {
         maqueen.motorStop(maqueen.Motors.All)
