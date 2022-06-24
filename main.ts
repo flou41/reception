@@ -40,21 +40,21 @@ basic.forever(function () {
         maqueen.writeLED(maqueen.LED.LEDLeft, maqueen.LEDswitch.turnOff)
         maqueen.writeLED(maqueen.LED.LEDRight, maqueen.LEDswitch.turnOff)
         if (x == 0 && y < 0) {
-            maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CCW, Math.abs(y) - 10)
-            maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, Math.abs(y) - 10)
+            maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CCW, Math.abs(y) * 40 / 80)
+            maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, Math.abs(y) * 40 / 80)
         } else if (x == 0 && y > 0) {
-            maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, y - 10)
-            maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CCW, y - 10)
+            maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, y * 40 / 80)
+            maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CCW, y * 40 / 80)
         } else if (x < 0 && y == 0) {
-            maqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CW, Math.abs(x))
+            maqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CW, Math.abs(x) * 40 / 80)
         } else if (x > 0 && y == 0) {
-            maqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CCW, x)
+            maqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CCW, x * 40 / 80)
         } else if (x < 0 && y < 0) {
-            maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, Math.abs(x))
-            maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, x - Math.abs(y))
+            maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, Math.constrain(Math.abs(x), 0, 30))
+            maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, Math.constrain(Math.abs(x) - Math.abs(y), 0, 30))
         } else if (x < 0 && y > 0) {
-            maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, Math.abs(x))
-            maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, x - Math.abs(y))
+            maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, Math.constrain(Math.abs(x), 0, 30))
+            maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, Math.constrain(Math.abs(x) - y, 0, 30))
         } else if (x > 0 && y == 0) {
             maqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CCW, x)
         } else if (x > 0 && y == 0) {
@@ -116,6 +116,19 @@ basic.forever(function () {
             basic.pause(500)
             maqueen.servoRun(maqueen.Servos.S2, 90)
             basic.pause(5000)
+        }
+    }
+})
+basic.forever(function () {
+    if (deplacement == 0) {
+        if (maqueen.readPatrol(maqueen.Patrol.PatrolLeft) == 0 || maqueen.readPatrol(maqueen.Patrol.PatrolRight) == 0) {
+            if (maqueen.readPatrol(maqueen.Patrol.PatrolLeft) == 1) {
+                maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 50)
+                maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, 40)
+            } else if (maqueen.readPatrol(maqueen.Patrol.PatrolRight) == 1) {
+                maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 40)
+                maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, 50)
+            }
         }
     }
 })
